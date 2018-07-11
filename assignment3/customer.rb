@@ -1,4 +1,5 @@
-require_relative "product.rb"
+require_relative "product"
+require_relative "order"
 class Customer
   def choice
    puts "1.list all products 2.search products 3.buy product enter choice"
@@ -8,7 +9,7 @@ class Customer
   elsif customer_choice == '2'
   then P.search
   elsif customer_choice == '3'
-  then P.customer_information
+  then O.customer_information
   else
     puts "invalid choice"
   end

@@ -20,7 +20,7 @@ end
 
 S=Shopkeeper.new
 S.choice
-
+end
 
 
 

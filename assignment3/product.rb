@@ -1,6 +1,5 @@
 class Product
   def add
-  @@id=0
   puts "enter product name"
   product_name=gets.chomp
   puts "enter product price"
@@ -9,65 +8,60 @@ class Product
   stockitem=gets.chomp
   puts "enter company name"
   companyname=gets.chomp
-  line=+product_name+price+stockitem+companyname
-  File.open('inventory.txt', 'w') { |file| file.write(line) }
-  @@id+1
+  id=File.foreach('inventory.txt').count
+  id.to_s
+  add_line= " #{id+1}"+"   #{product_name}" + "   #{price}" + "   #{stockitem}" + "   #{companyname}"+"\n"
+  File.open('inventory.txt', 'a+') { |file| file.write(add_line) }
   end
   def remove
-      puts "enter id to delete"
-      gets @id
-      File.open('inventory.txt', 'w') do |out_file|
-      File.foreach('inventary.txt') do |line|
-         out_file.puts line unless line =~ /@id/
+    puts "enter id to delete"
+    delete_id=gets.chomp
+    read_file = File.new('inventory.txt', "r").read
+    write_file = File.new('inventory.txt', "w")
+    read_file.each_line do |line|
+    write_file.write(line) unless line.include? delete_id
+    end
   end
   def edit
     puts "enter id of the product to edit"
     product_id=gets.chomp
-    if File.readlines("inventory.txt").grep(/product_id/)
-      print "product found"
+    puts "enter product_name"
+    product_name=gets.chomp
     puts "enter product price"
     price=gets.chomp
     puts "enter stock item "
     stockitem=gets.chomp
     puts "enter company name"
     companyname=gets.chomp
-    line=+price+stockitem+companyname
-      File.open('inventory.txt', 'w') { |file| file.write(line) }
+    line=" #{product_id}"+"   #{product_name}" + "   #{price}" + "   #{stockitem}" + "   #{companyname}"
+    file_names = ['inventory.txt']
+    file_names.each do |file_name|
+    text = File.read("inventory.txt")
+    new_contents = text.gsub(/#{product_id}/, line)
+    puts new_contents
+    File.open("inventory.txt", "w") {|file| file.puts new_contents }
     end
   end
   def list
    puts "details of file"
    file='inventory.txt'
-   f = File.open(file, "r")
-   f.each_line { |line|
-    puts "#{line}"
-    f.close
-   }
+   File.open('inventory.txt').each do |line|
+   print " #{line}"
    end
-   def search
+  end
+  def search
     puts "enter name of the product to be searched"
     product_name=gets.chomp
-    if File.readlines("inventory.txt").grep(/product_name/) == 1
-    print "product found"
-    else
-    print "product not found"
-    end
-    def customer_information
-      puts "enter product id"
-      product_id = gets.chomp
-      puts "product name"
-      product_name = gets.chomp
-      puts "card number"
-      card_no = gets.chomp
-      puts "CVV"
-      cvv = gets.chomp
-      information=+product_id+product_name+card_no+cvv
-      file='orders.txt'
-      f = File.open(file, "w"){ |file| file.write(information)}
-      f.close
+    File.open("inventory.txt") do |f|
+    f.each_line do |line|
+      if line =~ /#{product_name}/
+      puts "Product Found: #{line}"
+      else
+        puts "Product not found"
       end
+      end
+      end
+  end
 end
-
-
 
 P=Product.new
