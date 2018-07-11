@@ -4,22 +4,23 @@ def choice
   puts "enter choice 1.add product 2.remove product 3.search product 4.edit product 5.list all products"
   shopkeeper_choice=gets.chomp
   if shopkeeper_choice == '1'
-    then P.add
+    product.add
   elsif shopkeeper_choice == '2'
-    then P.remove
+    product.remove
   elsif shopkeeper_choice == '3'
-    then P.search
+    product.search
   elsif shopkeeper_choice == '4'
-    then P.edit
+    product.edit
   elsif shopkeeper_choice == '5'
-    then P.list
+    product.list
   else
   puts "invalid choice"
   end
+
 end
 
-S=Shopkeeper.new
-S.choice
+shopkeeper=Shopkeeper.new
+shopkeeper.choice
 end
 
 

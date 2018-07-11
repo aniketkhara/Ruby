@@ -1,1 +1,2 @@
- 1   pen   10   5   reynolds
+
+1||a||a||a||a
