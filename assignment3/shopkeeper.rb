@@ -2,12 +2,7 @@ require_relative "product"
 class Shopkeeper
 def choice
   puts "enter choice 1.add product 2.remove product 3.search product 4.edit product 5.list all products"
-end
-end
-
-S=Shopkeeper.new
-S.choice
-shopkeeper_choice=gets.chomp
+  shopkeeper_choice=gets.chomp
   if shopkeeper_choice == '1'
     then P.add
   elsif shopkeeper_choice == '2'
@@ -20,6 +15,11 @@ shopkeeper_choice=gets.chomp
     then P.list
   else
   puts "invalid choice"
+  end
+end
+
+S=Shopkeeper.new
+S.choice
 
 
 
