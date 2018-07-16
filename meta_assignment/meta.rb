@@ -18,7 +18,7 @@ input_1 = Class.new do
   end
 
 end
-f=input_1.new
-f.create_attributes
+array_of_hashes=input_1.new
+array_of_hashes.create_attributes
 
 
